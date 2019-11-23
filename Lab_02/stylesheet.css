@@ -29,13 +29,18 @@ input:checked {
 
 .container {
     width: 100%;
-    display:flex;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: baseline;
 }
 
-.item {
+div.item {
     flex-grow: 1;
+    width: 70px;
+    height: 100px;
+    display: inline-block;
+    background: orange;
+    margin: 10px;
 }
