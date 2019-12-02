@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        td {
+            width: 80px;
+            height: 80px;
+            text-align: center;
+        }
+        button {
+            height: 100%;
+            width: 100%
+        }        
+    </style>
+</head>
+<body>
+    <table border="1pt">
+        <tr><td colspan = "4" style="text-align: right; height: 50px;"><div id="num_field" style="margin-right: 10px;">0</div><!-- <-Numbers box --></td><td rowspan="5"><button onclick="clr()" style="height:400px">Clear</button></td></tr>
+        <tr><td><button onclick="num_concat(7)">7</button></td><td><button onclick="num_concat(8)">8</button></td><td><button onclick="num_concat(9)">9</button></td><td><button onclick="sign_press('+')">+</button></td></tr><!-- 7 8 9 + c -->
+        <tr><td><button onclick="num_concat(4)">4</button></td><td><button onclick="num_concat(5)">5</button></td><td><button onclick="num_concat(6)">6</button></td><td><button onclick="sign_press('-')">-</button></td></tr><!-- 4 5 6 - l -->
+        <tr><td><button onclick="num_concat(1)">1</button></td><td><button onclick="num_concat(2)">2</button></td><td><button onclick="num_concat(3)">3</button></td><td><button onclick="sign_press('*')">*</button></td></tr><!-- 1 2 3 * e -->
+        <tr><td colspan="3"><button onclick="enter()">=</button></td><td><button onclick="sign_press('/')">/</button></td></tr>                                                                                                                  <!--   =   / ar -->
+    </table>
+
+    <script>
+            var num_field = document.getElementById("num_field");
+            var sign = null;
+            var temp = 0;//first entered entered
+            var temp2 = 0;//second entered
+            var mode = 0;// 0 - num_filed, 1 - temp
+
+            function num_concat(num)
+            {
+                    if(num_field.innerHTML == 0)
+                        num_field.innerHTML = num;
+                    else
+                        num_field.innerHTML += num;
+
+                    if(mode ==0)
+                        temp = parseInt(num_field.innerHTML, 10);
+                    else
+                        temp2 = parseInt(num_field.innerHTML, 10);
+            }
+
+            function clr()//clear num_field
+            {
+                num_field.innerHTML = 0;
+                mode = 0;
+                temp = 0;
+                temp2 = 0;
+            }
+
+            function sign_press(new_sign)
+            {
+                sign = new_sign;
+                
+                if(mode == 0)
+                {
+                    mode = 1;    
+                    temp = 0;
+                    num_field.innerHTML = 0;
+                }
+            }
+
+            function enter()
+            {
+                switch(sign)
+                {
+                    case '+':
+                        if(mode != 0)
+                        {
+                            num_field.innerHTML = parseInt(num_field.innerHTML, 10) + temp2;
+                            mode = 0;
+                        }
+                        else
+                        {
+                            num_field.innerHTML = temp1 + temp2;
+                        }
+                    break;
+                    case '-':
+                        if(mode == 0)
+                        {
+                            num_field.innerHTML = parseInt(num_field.innerHTML, 10) - temp2;
+                            mode = 0;
+                        }
+                        else
+                        {
+                            num_field.innerHTML = temp1 - temp2;                           
+                        }
+                    break;
+                    case '*':
+                        if(mode == 0)
+                        {
+                            num_field.innerHTML = parseInt(num_field.innerHTML, 10) * temp2;
+                            mode = 0;
+                        }
+                        else
+                        {
+                            num_field.innerHTML = temp1 * temp2;
+                        }
+                    break;
+                    case '/':
+                        if(mode == 0)
+                        {
+                            num_field.innerHTML = parseInt(num_field.innerHTML, 10) / temp2;
+                            mode = 0;
+                        }
+                        else
+                        {
+                            num_field.innerHTML = temp1 * temp2;
+                        }
+                    break;
+                }
+            }
+        </script>
+</body>
+</html>
