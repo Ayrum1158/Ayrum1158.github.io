@@ -24,7 +24,7 @@
         <tr><td><button onclick="num_concat(7)">7</button></td><td><button onclick="num_concat(8)">8</button></td><td><button onclick="num_concat(9)">9</button></td><td><button onclick="sign_press('+')">+</button></td></tr><!-- 7 8 9 + c -->
         <tr><td><button onclick="num_concat(4)">4</button></td><td><button onclick="num_concat(5)">5</button></td><td><button onclick="num_concat(6)">6</button></td><td><button onclick="sign_press('-')">-</button></td></tr><!-- 4 5 6 - l -->
         <tr><td><button onclick="num_concat(1)">1</button></td><td><button onclick="num_concat(2)">2</button></td><td><button onclick="num_concat(3)">3</button></td><td><button onclick="sign_press('*')">*</button></td></tr><!-- 1 2 3 * e -->
-        <tr><td><button onclick="num_concat(0)">0</button></td><td colspan="2"><button onclick="enter()">=</button></td><td><button onclick="sign_press('/')">/</button></td></tr>                                                                                                                  <!--   =   / ar -->
+        <tr><td><button onclick="num_concat(0)">0</button></td><td><button onclick="num_concat('.')">.</button></td><td><button onclick="enter()">=</button></td><td><button onclick="sign_press('/')">/</button></td></tr>                                                                                                                  <!--   =   / ar -->
     </table>
 
     <script>
@@ -33,18 +33,29 @@
             var temp1 = 0;//first entered entered
             var temp2 = 0;//second entered
             var mode = 0;
+            var dot = 0;
 
             function num_concat(num)
             {
                     if(num_field.innerHTML == 0)
+                    {
+                        if(num == '.')
+                        {
+                            if(dot == 0)
+                            {
+                                num_field.innerHTML += num;
+                                dot = 1;
+                            }
+                        }
                         num_field.innerHTML = num;
+                    }
                     else
                         num_field.innerHTML += num;
 
                     if(mode == 0)
-                        temp1 = parseInt(num_field.innerHTML, 10);
+                        temp1 = parseFloat(num_field.innerHTML);
                     else
-                        temp2 = parseInt(num_field.innerHTML, 10);
+                        temp2 = parseFloat(num_field.innerHTML);
             }
 
             function clr()//clear num_field
@@ -53,6 +64,8 @@
                 mode = 0;
                 temp1 = 0;
                 temp2 = 0;
+                sign = null;
+                dot = 0;
             }
 
             function sign_press(new_sign)
@@ -61,8 +74,7 @@
                 
                 if(mode == 0)
                 {
-                    mode = 1;    
-                    temp1 = 0;
+                    mode = 1;
                     num_field.innerHTML = 0;
                 }
             }
@@ -74,8 +86,8 @@
                     case '+':
                         if(mode != 0)// != 0 means usual calc usage
                         {
-                            num_field.innerHTML = parseInt(num_field.innerHTML, 10) + temp2;
-                            temp1 = parseInt(num_field.innerHTML);
+                            num_field.innerHTML = parseFloat(num_field.innerHTML) + temp1;
+                            temp1 = parseFloat(num_field.innerHTML);
                             mode = 0;
                         }
                         else// == 0 means pressing = again
@@ -86,8 +98,8 @@
                     case '-':
                         if(mode != 0)
                         {
-                            num_field.innerHTML = parseInt(num_field.innerHTML, 10) - temp2;
-                            temp1 = parseInt(num_field.innerHTML);
+                            num_field.innerHTML = parseFloat(num_field.innerHTML) - temp1;
+                            temp1 = parseFloat(num_field.innerHTML);
                             mode = 0;
                         }
                         else
@@ -98,8 +110,8 @@
                     case '*':
                         if(mode != 0)
                         {
-                            num_field.innerHTML = parseInt(num_field.innerHTML, 10) * temp2;
-                            temp1 = parseInt(num_field.innerHTML);
+                            num_field.innerHTML = parseFloat(num_field.innerHTML) * temp1;
+                            temp1 = parseFloat(num_field.innerHTML);
                             mode = 0;
                         }
                         else
@@ -110,9 +122,11 @@
                     case '/':
                         if(mode != 0)
                         {
-                            num_field.innerHTML = parseInt(num_field.innerHTML, 10) / temp2;
-                            temp1 = parseInt(num_field.innerHTML);
+                            num_field.innerHTML = parseFloat(num_field.innerHTML) / temp1;
+                            temp1 = parseFloat(num_field.innerHTML);
                             mode = 0;
+                            if(temp1 % 1 !== 0)
+                                dot = 1;
                         }
                         else
                         {
