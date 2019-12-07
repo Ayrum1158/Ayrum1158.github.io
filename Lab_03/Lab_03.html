@@ -20,7 +20,7 @@
 </head>
 <body>
     <table border="1pt">
-        <tr><td colspan = "4" style="text-align: right; height: 50px;"><div id="num_field" style="margin-right: 10px;">0</div><!-- <-Numbers box --></td><td rowspan="5"><button onclick="clr()" style="height:400px">Clear</button></td></tr>
+        <tr><td colspan = "4" style="text-align: right; height: 50px;"><div id="num_field" style="margin-right: 10px;"></div><!-- <-Numbers box --></td><td rowspan="5"><button onclick="clr()" style="height:400px">Clear</button></td></tr>
         <tr><td><button onclick="num_concat(7)">7</button></td><td><button onclick="num_concat(8)">8</button></td><td><button onclick="num_concat(9)">9</button></td><td><button onclick="sign_press('+')">+</button></td></tr><!-- 7 8 9 + c -->
         <tr><td><button onclick="num_concat(4)">4</button></td><td><button onclick="num_concat(5)">5</button></td><td><button onclick="num_concat(6)">6</button></td><td><button onclick="sign_press('-')">-</button></td></tr><!-- 4 5 6 - l -->
         <tr><td><button onclick="num_concat(1)">1</button></td><td><button onclick="num_concat(2)">2</button></td><td><button onclick="num_concat(3)">3</button></td><td><button onclick="sign_press('*')">*</button></td></tr><!-- 1 2 3 * e -->
@@ -29,38 +29,38 @@
 
     <script>
             var num_field = document.getElementById("num_field");
+
             var sign = null;
-            var temp1 = 0;//first entered entered
+            var temp1 = 0;//first entered
             var temp2 = 0;//second entered
-            var mode = 0;
-            var dot = 0;
+            var mode = 0;// 0 - temp1, 1 - temp2 write
+            var dot = 0;// 1 when . pressed
 
             function num_concat(num)
             {
-                    if(num_field.innerHTML == 0)
+                if(num == '.')
+                {
+                    if(dot == 0)
                     {
-                        if(num == '.')
-                        {
-                            if(dot == 0)
-                            {
-                                num_field.innerHTML += num;
-                                dot = 1;
-                            }
-                        }
-                        num_field.innerHTML = num;
-                    }
+                        dot = 1;
+                        if(num_field.innerHTML == '')
+                            num_field.innerHTML = 0;
+                    }                        
                     else
-                        num_field.innerHTML += num;
+                        return;
+                }
 
-                    if(mode == 0)
-                        temp1 = parseFloat(num_field.innerHTML);
-                    else
-                        temp2 = parseFloat(num_field.innerHTML);
+                num_field.innerHTML += num;
+            
+                if(mode == 0)
+                    temp1 = parseFloat(num_field.innerHTML);
+                else
+                    temp2 = parseFloat(num_field.innerHTML);
             }
 
             function clr()//clear num_field
             {
-                num_field.innerHTML = 0;
+                num_field.innerHTML = '';
                 mode = 0;
                 temp1 = 0;
                 temp2 = 0;
@@ -71,11 +71,12 @@
             function sign_press(new_sign)
             {
                 sign = new_sign;
-                
+                dot = 0;
+
                 if(mode == 0)
                 {
                     mode = 1;
-                    num_field.innerHTML = 0;
+                    num_field.innerHTML = '';
                 }
             }
 
@@ -84,56 +85,22 @@
                 switch(sign)
                 {
                     case '+':
-                        if(mode != 0)// != 0 means usual calc usage
-                        {
-                            num_field.innerHTML = parseFloat(num_field.innerHTML) + temp1;
-                            temp1 = parseFloat(num_field.innerHTML);
-                            mode = 0;
-                        }
-                        else// == 0 means pressing = again
-                        {
-                            num_field.innerHTML = temp1 + temp2;
-                        }
+                        num_field.innerHTML = temp1 + temp2;             
                     break;
                     case '-':
-                        if(mode != 0)
-                        {
-                            num_field.innerHTML = parseFloat(num_field.innerHTML) - temp1;
-                            temp1 = parseFloat(num_field.innerHTML);
-                            mode = 0;
-                        }
-                        else
-                        {
-                            num_field.innerHTML = temp1 - temp2;                           
-                        }
+                        num_field.innerHTML = temp1 - temp2;
                     break;
                     case '*':
-                        if(mode != 0)
-                        {
-                            num_field.innerHTML = parseFloat(num_field.innerHTML) * temp1;
-                            temp1 = parseFloat(num_field.innerHTML);
-                            mode = 0;
-                        }
-                        else
-                        {
-                            num_field.innerHTML = temp1 * temp2;
-                        }
+                        num_field.innerHTML = temp1 * temp2;
                     break;
                     case '/':
-                        if(mode != 0)
-                        {
-                            num_field.innerHTML = parseFloat(num_field.innerHTML) / temp1;
-                            temp1 = parseFloat(num_field.innerHTML);
-                            mode = 0;
-                            if(temp1 % 1 !== 0)
-                                dot = 1;
-                        }
-                        else
-                        {
-                            num_field.innerHTML = temp1 * temp2;
-                        }
+                        num_field.innerHTML = temp1 / temp2;
                     break;
                 }
+                if(temp1 % 1 !== 0)//if float
+                    dot = 1;
+                temp1 = parseFloat(num_field.innerHTML);
+                mode = 0;
             }
         </script>
 </body>
