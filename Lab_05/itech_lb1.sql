@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 08 2020 г., 16:05
--- Версия сервера: 10.4.10-MariaDB
--- Версия PHP: 7.1.33
+-- Время создания: Мар 10 2020 г., 12:29
+-- Версия сервера: 10.3.15-MariaDB
+-- Версия PHP: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,7 +44,8 @@ CREATE TABLE `client` (
 INSERT INTO `client` (`ID_Client`, `name`, `login`, `password`, `IP`, `balance`) VALUES
 (0, 'vasya', 'nagibator228', 'parol123', '192.128.0.1', 100),
 (1, 'petya', 'asdf123', 'password', '192.162.100.50', 200),
-(2, 'kolya', 'omegahacker153', 'lkjfasdfjkl7q', '222.118.131.66', 5000);
+(2, 'kolya', 'omegahacker153', 'lkjfasdfjkl7q', '222.118.131.66', -5000),
+(4, 'alexey', 'poorguy', 'sdfgghjk', '43.55.119.6', -55);
 
 -- --------------------------------------------------------
 
