@@ -32,10 +32,11 @@
 
     $result = $sth->fetch(PDO::FETCH_NUM);
 
+    echo "<table border = '1px'<tr><th>Username</th><th>In traffic</th><th>Out traffic</th><th>Summary session time</th></tr><tr>";
     foreach($result as $oneOFResults)
     {
-        echo "$oneOFResults<br>";
+        echo "<td>$oneOFResults</td>";
     }
-
+    echo "</tr></table>";
     $dbh=null;
 ?>
