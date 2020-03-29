@@ -9,8 +9,23 @@
     <form action="client_stats.php" method="POST"> <!-- 1 -->
         <label>Статистика работы в сети клиента (по имени клиента):</label>
         <br>
-        <input type="text" name="username">
-        <br>
+        <select name = "username">
+        <?php
+            include 'db_connect.php';
+            $cmdSQL_Select = "SELECT name FROM client";
+            $sth = $dbh->prepare($cmdSQL_Select);#preparation not really needed
+            $sth->execute();
+            
+            $result = $sth->fetchAll(PDO::FETCH_NUM);
+
+            echo '<option selected = "selected">Выберите пользователя</option>';
+
+            foreach($result as $name)
+            {
+                echo "<option>$name[0]</option>";
+            }
+        ?>
+        </select>
         <input type="submit">
     </form>
     <br>

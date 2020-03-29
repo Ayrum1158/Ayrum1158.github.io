@@ -1,12 +1,5 @@
 <?php
-$db_driver="mysql";
-$host="localhost";
-$database="itech_lb1";
-$dsn = "$db_driver:host=$host;dbname=$database";
-
-$username="root";
-$password="";
-$options = array(PDO::ATTR_PERSISTENT => true, PDO:: MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
+include 'db_connect.php';
 
 try
 {
@@ -28,4 +21,3 @@ catch (PDOException $e)
         echo"<tr><td>$row[0]</td><td>$row[1]</td><td>$row[2]</td></tr>";
     }
     echo "</table>";
-?>
