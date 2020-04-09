@@ -22,4 +22,3 @@ foreach($result as $oneOFResults)
 }
 echo "</tr></table><br>";
 $dbh=null;
-

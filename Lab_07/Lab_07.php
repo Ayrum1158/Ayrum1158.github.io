@@ -36,13 +36,16 @@
     <form action="network_stats.php" method="POST"><!-- 2 -->
         <label>Статистика работы сети за указанный промужуток времени:</label>
         <br>
-        С <input type="datetime-local" name = "startTime">
+         С <input type="datetime-local" name="startTime" id="startTime">
         <br>
-        По <input type="datetime-local" name = "endTime">
+        По <input type="datetime-local" name="endTime" id="endTime">
         <br>
-        <input class="input" type="button" value="Submit" onclick="">
+        <input class="input" type="button" value="Submit" onclick="getNetworkStats()">
     </form>
     <br>
+
+    <div id="placeholder-networkStats"></div>
+
     <form action="minus_balance.php" method="POST"><!-- 3 -->
         <label>Список клиентов с отрицательным балансом:</label>
         <br>
