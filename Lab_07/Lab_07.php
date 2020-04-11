@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="ajax.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <form action="client_stats.php" method="POST"> <!-- 1 -->
@@ -49,6 +54,8 @@
     <form action="minus_balance.php" method="POST"><!-- 3 -->
         <label>Список клиентов с отрицательным балансом:</label>
         <br>
-        <input class="input" type="button" value="Submit" onclick="">
+        <input class="input" type="button" value="Submit" onclick="getMinusBalance()">
     </form>
+    <br>
+    <div id="placeholder-minusBalance"></div>
 </body>
