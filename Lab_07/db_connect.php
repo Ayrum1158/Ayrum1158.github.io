@@ -6,7 +6,7 @@ $dsn = "$db_driver:host=$host;dbname=$database";
 
 $username="root";
 $password="";
-$options = array(PDO::ATTR_PERSISTENT => true, PDO:: MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
+$options = array(PDO::ATTR_PERSISTENT => true);//, PDO:: MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
 
 try
 {
