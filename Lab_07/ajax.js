@@ -1,4 +1,4 @@
-function getClientStats()
+async function getClientStats()
 {
     var ajax = new XMLHttpRequest();
 
@@ -11,6 +11,7 @@ function getClientStats()
     };
     
     ajax.open('GET', `client_stats.php?username=${username}`);
+
     ajax.send();
 }
 
@@ -29,8 +30,6 @@ function getNetworkStats()
 
         if(xml == null)
             return;
-        
-        console.log(xml);
 
         let inTraffic = xml.getElementsByTagName('inTraffic');
         let outTraffic = xml.getElementsByTagName('outTraffic');

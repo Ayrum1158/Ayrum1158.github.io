@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-    <form action="client_stats.php" method="POST"> <!-- 1 -->
+    <!-- 1 -->
         <label>Статистика работы в сети клиента (по имени клиента):</label>
         <br>
         <select name = "username" id="username">
@@ -33,12 +33,11 @@
         ?>
         </select>
         <input class="input" type="button" value="Submit" onclick="getClientStats()">
-    </form>
     <br>
 
     <div id="placeholder-clientStats"></div>
     
-    <form action="network_stats.php" method="POST"><!-- 2 -->
+    <!-- 2 -->
         <label>Статистика работы сети за указанный промужуток времени:</label>
         <br>
          С <input type="datetime-local" name="startTime" id="startTime">
@@ -46,16 +45,16 @@
         По <input type="datetime-local" name="endTime" id="endTime">
         <br>
         <input class="input" type="button" value="Submit" onclick="getNetworkStats()">
-    </form>
+    
     <br>
 
     <div id="placeholder-networkStats"></div>
 
-    <form action="minus_balance.php" method="POST"><!-- 3 -->
+    <!-- 3 -->
         <label>Список клиентов с отрицательным балансом:</label>
         <br>
         <input class="input" type="button" value="Submit" onclick="getMinusBalance()">
-    </form>
+    
     <br>
     <div id="placeholder-minusBalance"></div>
 </body>

@@ -18,3 +18,4 @@ catch (PDOException $e)
     $result = $dbh->query($cmdSQL_Select, PDO::FETCH_OBJ)->fetchAll();
 
     echo(json_encode($result));
+    

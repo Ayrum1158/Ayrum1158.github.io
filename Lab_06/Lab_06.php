@@ -28,8 +28,12 @@
         <input type="submit">
         <br>
     </form>
-    <form>
-        
+
+    <br><br><br>
+    
+    <form method="get" action="InOutTraffic.php"><!-- Task 2 -->
+        Общий входящий и исходящий траффик:<br>
+        <input type="submit">
     </form>
     <br><br><br>
 </body>
