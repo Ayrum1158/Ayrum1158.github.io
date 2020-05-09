@@ -4,37 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="ajax.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <br>
-    <form method="get" action="Messages.php"><!-- Task 1 --> 
-        Сообщения от выбранного клиента:<br>
-        <select name = "login">
-            <?php
-                include "dbconnect.php";
-
-                $collection = $DB->users;
-
-                $result = $collection->find([],['projection'=>['_id'=>0,'login'=>1]]);
-
-                echo '<option selected = "selected">Выберите пользователя</option>';
-                foreach($result as $login)
-                {
-                    echo "<option>{$login['login']}</option>";
-                }
+    <!-- Task 1 --> 
+    Сообщения от выбранного клиента:<br>
+    <select id = "login_select">
+        <?php
+            include "dbconnect.php";            
+            $collection = $DB->users;           
+            $result = $collection->find([],['projection'=>['_id'=>0,'login'=>1]]);          
+            echo '<option selected = "selected">Выберите пользователя</option>';
+            foreach($result as $login)
+            {
+                echo "<option>{$login['login']}</option>";
+            }
             ?>
-        </select>
-        <br>
-        <input type="submit">
-        <br>
-    </form>
+    </select>
+    <br>
+    From DB:
+    <input type="button" value="Send" onclick="ClientMsgs()"><br>
+    From LocalStorage:
+    <input type="button" value="Send" onclick="ClientMsgsLocal()"><br><br>
+    <div id="MSGS_PH"></div>      
+    <br><br>
 
-    <br><br><br>
-    
-    <form method="get" action="InOutTraffic.php"><!-- Task 2 -->
-        Общий входящий и исходящий траффик:<br>
-        <input type="submit">
-    </form>
-    <br><br><br>
+    <!-- Task 2 -->
+    Общий входящий и исходящий траффик:<br>
+    <input type="button" value="Send" onclick="TotalIOTraffic()"><br><br>
+    <div id="IOTRAFFIC_PH"></div>
+    <br><br>
+
+    <!-- Task 3 -->
+    Список клиентов с отрицательным балансом:<br>
+    <input type="button" value="Send" onclick="MinusBalance()"><br><br>
+    <div id="NEGBALANCE_PH"></div>
 </body>
 </html>

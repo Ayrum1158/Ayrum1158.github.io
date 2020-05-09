@@ -1,5 +1,4 @@
 <?php
-
 include "dbconnect.php";
 
 $collection = $DB->sessions;
@@ -17,7 +16,7 @@ foreach($results as $item)//fuck the "aggregate()"!
     $outTraffic += $item['outTraffic'];
 }
 
-echo "<table border='1pt'>
+echo "<table>
 <tr><th>InTraffic</th><th>OutTraffic</th></tr>
 <tr><td>$inTraffic</td><td>$outTraffic</td></tr>
 </table>";
